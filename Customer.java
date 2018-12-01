@@ -1,19 +1,15 @@
 import java.util.ArrayList;
 
-public class Customer {
-    private String firstName;
-    private String lastName;
+public class Customer extends Person{
     private int IDNumber;
     private ArrayList<DVD> customerDVD;
 
     public Customer(String firstName, String lastName, int IDNumber){
-        this.firstName = firstName;
-        this.lastName = lastName;
+        super();
         this.IDNumber = IDNumber;
         customerDVD = new ArrayList<DVD>();
     }
 
-    @Override
     public boolean equals(Object obj) {
         if(obj instanceof Customer){
             Customer temp = (Customer) obj;
@@ -23,30 +19,28 @@ public class Customer {
             return false;
     }
 
-    @Override
     public String toString() {
-        String str = "Name: " + firstName + " " + lastName + "\nID Number: " + IDNumber + customerDVD.toString();
-        return str;
-    }
-
-    public String getLastName() {
-        return lastName;
+        return (super.toString() + "\nID Number: " + IDNumber + customerDVD.toString());
     }
 
     public String getFirstName() {
-        return firstName;
+        return super.getFirstName();
+    }
+
+    public String getLastName(){
+        return  super.getLastName();
+    }
+
+    public void setFirstName(String firstName) {
+        super.setFirstName(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        super.setLastName(lastName);
     }
 
     public int getIDNumber() {
         return IDNumber;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public void setIDNumber(int IDNumber) {

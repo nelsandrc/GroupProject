@@ -1,3 +1,7 @@
+/**
+ * @author Andrew Nelson
+ * Stores information for a dvd for use by a movie rental company
+ */
 public class DVD {
     private String movieName;
     private String leadActor;
