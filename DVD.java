@@ -23,7 +23,7 @@ public class DVD {
 
     @Override
     public String toString() {
-        return ("Movie: " + movieName + "\nStar: " + leadActor + "\nDirector: " + director + "\nProducer" + producer + "\nProduction Company: " + productionCompany + "\n");
+        return ("Movie: " + movieName + "\nStar: " + leadActor + "\nDirector: " + director + "\nProducer: " + producer + "\nProduction Company: " + productionCompany + "\n");
     }
 
     @Override
@@ -52,6 +52,14 @@ public class DVD {
         }
         else
             return false;
+    }
+
+    public boolean isRented(){
+        return currentInventory < standardInventory;
+    }
+
+    public boolean isInStock(){
+        return currentInventory > 0 && standardInventory > 0;
     }
 
     public int getCurrentInventory() {
