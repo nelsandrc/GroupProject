@@ -5,7 +5,7 @@ public class Customer extends Person{
     private ArrayList<DVD> customerDVD;
 
     public Customer(String firstName, String lastName, int IDNumber){
-        super();
+        super(firstName, lastName);
         this.IDNumber = IDNumber;
         customerDVD = new ArrayList<DVD>();
     }
@@ -20,7 +20,7 @@ public class Customer extends Person{
     }
 
     public String toString() {
-        return (super.toString() + "\nID Number: " + IDNumber + customerDVD.toString());
+        return (super.toString() + "\nID Number: " + IDNumber);
     }
 
     public String getFirstName() {
