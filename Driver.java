@@ -32,10 +32,10 @@ public class Driver {
                     hasDVD(storeDVDs);
                     break;
                 case 2:
-                    checkOut(storeDVDs);
+                    checkOut(storeDVDs, customers);
                     break;
                 case 3:
-                    checkIn(storeDVDs);
+                    checkIn(storeDVDs, customers);
                     break;
                 case 4:
                     isInStock(storeDVDs);
@@ -82,7 +82,7 @@ public class Driver {
             DVDfileInput.nextLine();
             DVD temp = new DVD(tempMovieName, tempMovieStar, tempMovieDirector, tempMovieProducer, tempMovieProductionCompany, tempDefaultINventory);
             DVDList.add(temp);
-            System.out.println(temp);
+            System.out.println(temp + " " + temp.getCurrentInventory());
         }while(DVDfileInput.hasNext());
         DVDfileInput.close();
     }
@@ -123,21 +123,43 @@ public class Driver {
 
     public static void checkOut(ArrayList<DVD> DVDlist, ArrayList<Customer> customerList){
         Scanner keyboard = new Scanner(System.in);
+
         System.out.println("Enter the name of the DVD you want to rent: ");
         String wantedMovieName = keyboard.nextLine();
+
+
         System.out.println("Enter your ID number: ");
         int userID = keyboard.nextInt();
         keyboard.nextLine();
 
-        if(isCustomer(customerList, userID) && (hasDVD(DVDlist, wantedMovieName)))//If both customer and movie exist in system
+
+        if(isCustomer(customerList, userID) && (hasDVDInStore(DVDlist, wantedMovieName)))//If both customer and movie exist in system
         {
-            
+            DVD workingDVD = new DVD();
+            Customer workingCustomer = new Customer();
+            workingDVD = getDVD(DVDlist, wantedMovieName);
+            workingCustomer = getCustomer(customerList, userID);
+
+
+            if(workingCustomer.getCustomerDVD().contains(workingDVD)){
+                System.out.println("Sorry, " + workingCustomer.getFirstName() + ", you can only have one copy of each movie. You seem to already have a copy of " + wantedMovieName);
+            }
+            else {
+                if(workingDVD.checkOutDVD()){
+                    workingCustomer.checkOutCustomer(workingDVD);
+                    System.out.println("You have succesfully checked out " + wantedMovieName + ". Enjoy the movie!");
+                }
+                else
+                    System.out.println( wantedMovieName + "is currently out of stock. Please come back at another time." + workingDVD);
+
+            }
+
         }
-        else if(!isCustomer(customerList, userID) && (hasDVD(DVDlist, wantedMovieName))){//If customer does not exist in system but movie does exist.
+        else if(!isCustomer(customerList, userID) && (hasDVDInStore(DVDlist, wantedMovieName))){//If customer does not exist in system but movie does exist.
             System.out.println("No user with ID number '" + userID + "' was found in our system. Please verify you typed your user ID number correctly.");
         }
-        else if(isCustomer(customerList, userID) && !(hasDVD(DVDlist, wantedMovieName))){//If customer exists but movie does not exist.
-            System.out.println(wantedMovieName + " was not found in our system. Please verify you typed the name correctly.");
+        else if(isCustomer(customerList, userID) && !(hasDVDInStore(DVDlist, wantedMovieName))){//If customer exists but movie does not exist.
+            System.out.println("Sorry, " + wantedMovieName + " was not found in our system. Please verify you typed the name correctly.");
         }
         else //If neither customer nor movie exist
         {
@@ -148,7 +170,7 @@ public class Driver {
 
     }
 
-    public static void checkIn(ArrayList<DVD> DVDlist){
+    public static void checkIn(ArrayList<DVD> DVDlist, ArrayList<Customer> customerList){
 
     }
 
@@ -205,20 +227,42 @@ public class Driver {
         }
     }
 
-    public static boolean hasDVD(ArrayList<DVD> DVDList, String wantedMovieName){
+    public static boolean hasDVDInStore(ArrayList<DVD> DVDList, String wantedMovieName){
         for(int index = 0; index < DVDList.size(); index++){
             if(DVDList.get(index).getMovieName().equals(wantedMovieName))
-               return true;
+            {
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean isCustomer(ArrayList<Customer> customerList ,int userID){
+    public static boolean isCustomer(ArrayList<Customer> customerList ,int userID){
         for(int index = 0; index < customerList.size(); index++){
-            if (customerList.get(index).getIDNumber() == userID)
+            if (customerList.get(index).getIDNumber() == userID) {
                 return true;
+            }
         }
         return false;
+    }
+
+    public static Customer getCustomer(ArrayList<Customer> customerList ,int userID){
+        for(int index = 0; index < customerList.size(); index++){
+            if (customerList.get(index).getIDNumber() == userID) {
+                return customerList.get(index);
+            }
+        }
+        return null;
+    }
+
+    public static DVD getDVD(ArrayList<DVD> DVDList, String wantedMovieName){
+        for(int index = 0; index < DVDList.size(); index++){
+            if(DVDList.get(index).getMovieName().equals(wantedMovieName))
+            {
+                return DVDList.get(index);
+            }
+        }
+        return null;
     }
 
 
