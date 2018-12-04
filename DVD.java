@@ -21,6 +21,15 @@ public class DVD {
         this.standardInventory = standardInventory;
     }
 
+    public DVD(){
+        movieName = "Default Title";
+        leadActor = "N/A";
+        director = "N/A";
+        producer = "N/A";
+        productionCompany = "N/A";
+        currentInventory = standardInventory = 0;
+    }
+
     @Override
     public String toString() {
         return ("Movie: " + movieName + "\nStar: " + leadActor + "\nDirector: " + director + "\nProducer: " + producer + "\nProduction Company: " + productionCompany + "\n");
@@ -36,7 +45,7 @@ public class DVD {
             return false;
     }
 
-    public boolean checkOut(){
+    public boolean checkOutDVD(){
         if(currentInventory > 0){
             currentInventory--;
             return true;

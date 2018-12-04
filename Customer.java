@@ -10,6 +10,12 @@ public class Customer extends Person{
         customerDVD = new ArrayList<DVD>();
     }
 
+    public Customer(){
+        super();
+        IDNumber = -1;
+        customerDVD = new ArrayList<DVD>();
+    }
+
     public boolean equals(Object obj) {
         if(obj instanceof Customer){
             Customer temp = (Customer) obj;
@@ -17,6 +23,10 @@ public class Customer extends Person{
         }
         else
             return false;
+    }
+
+    public void checkOutCustomer(DVD dvd){
+        this.customerDVD.add(dvd);
     }
 
     public String toString() {
@@ -47,4 +57,7 @@ public class Customer extends Person{
         this.IDNumber = IDNumber;
     }
 
+    public ArrayList<DVD> getCustomerDVD() {
+        return customerDVD;
+    }
 }
