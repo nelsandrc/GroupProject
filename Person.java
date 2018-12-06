@@ -1,12 +1,25 @@
+/**
+ * @author Andrew Nelson
+ * Represents a person for a DVD rental company.
+ */
 public class Person {
     private String firstName;
     private String lastName;
+
+    /**
+     * Creates a new person with the given parameters.
+     * @param firstName String representing the person's first name.
+     * @param lastName String representing the person's last name.
+     */
 
     public Person(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
+    /**
+     * Creates a new person with a default name.
+     */
     public Person(){
         firstName = "Default First Name";
         lastName = "Default Last Name";
