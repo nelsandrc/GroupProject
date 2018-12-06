@@ -1,5 +1,6 @@
 /**
  * @author Andrew Nelson
+ * @author Tyler Goldstein
  * Represents a customer utilizing the Person class for use by a DVD rental company.
  */
 

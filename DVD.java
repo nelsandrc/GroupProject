@@ -1,5 +1,6 @@
 /**
  * @author Andrew Nelson
+ * @author Tyler Goldstein
  * Stores information for a DVD for use by a movie rental company
  */
 public class DVD {

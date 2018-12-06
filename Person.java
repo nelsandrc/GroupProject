@@ -1,5 +1,6 @@
 /**
  * @author Andrew Nelson
+ * @author Tyler Goldstein
  * Represents a person for a DVD rental company.
  */
 public class Person {
